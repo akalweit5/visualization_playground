@@ -10,8 +10,7 @@ async function createJson(tsv_file: string) {
   
 
 
-serve((_req) => {
-  return new Response(`
+const html = `
     <!DOCTYPE html>
     <html>
       <head>
@@ -34,7 +33,7 @@ serve((_req) => {
           const chart = Plot.plot({
             marginLeft: 200,
             x: {axis: "top", percent: true},
-            y: {label: null},
+            y: {label: "Sample ID"},
             marks: [
               Plot.barX(coverageData, {
                 x: "proportion_≥_specified_depth",
@@ -71,12 +70,6 @@ serve((_req) => {
           document.getElementById("chart").appendChild(chart);
         </script>
       </body>
-    </html>
-  `, {
-    headers: { "content-type": "text/html" }
-  });
-});
+    </html>`;
 
-
-
-
+await Deno.writeTextFile("chart.html", html);

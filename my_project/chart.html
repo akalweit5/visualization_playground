@@ -1,0 +1,61 @@
+
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <title>Plot Example</title>
+        <script src="https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6/+esm"></script>
+        <style>
+          body { font-family: sans-serif; padding: 20px; }
+        </style>
+      </head>
+      <body>
+        <h2>Coverage Summary</h2>
+        <div id="chart"></div>
+
+        <script type="module">
+          import * as Plot from "https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6/+esm";
+          import { format } from "https://cdn.jsdelivr.net/npm/d3-format@3/+esm";
+
+          const coverageData = [{"sample_id":"01-2N1LZ_S199_L006","proportion_≥_specified_depth":"0.9844831622245259"},{"sample_id":"02-2N19V_S200_L006","proportion_≥_specified_depth":"0.9920743738086479"},{"sample_id":"03-2N1MO_S201_L006","proportion_≥_specified_depth":"0.9941811858341972"},{"sample_id":"04-2F5C1_S202_L006","proportion_≥_specified_depth":"0.9936461224626292"},{"sample_id":"05-2F7G0_S203_L006","proportion_≥_specified_depth":"0.993044176169615"},{"sample_id":"06-2F7EX_S204_L006","proportion_≥_specified_depth":"0.9928769688660001"},{"sample_id":"07-2F8AZ_S205_L006","proportion_≥_specified_depth":"0.9951844296558874"},{"sample_id":"08-2EXJG_S206_L006","proportion_≥_specified_depth":"0.9950841052737184"},{"sample_id":"09-2EYAK_S207_L006","proportion_≥_specified_depth":"0.992241581112263"},{"sample_id":"10-2EYQP_S208_L006","proportion_≥_specified_depth":"0.9953181954987794"},{"sample_id":"11-2F1W8_S209_L006","proportion_≥_specified_depth":"0.9951509881951643"},{"sample_id":"12-2F1TK_S210_L006","proportion_≥_specified_depth":"0.9950172223522723"},{"sample_id":"13-2F1RU_S211_L006","proportion_≥_specified_depth":"0.9933117078553991"},{"sample_id":"14-2F377_S212_L006","proportion_≥_specified_depth":"0.9926763201016621"},{"sample_id":"15-2F3TC_S213_L006","proportion_≥_specified_depth":"0.9948834565093804"},{"sample_id":"16-2FGRX_S214_L006","proportion_≥_specified_depth":"0.9951844296558874"},{"sample_id":"17-2FH8N_S215_L006","proportion_≥_specified_depth":"0.9949168979701033"},{"sample_id":"18-2FCD0_S216_L006","proportion_≥_specified_depth":"0.9950841052737184"},{"sample_id":"19-2FE0Y_S217_L006","proportion_≥_specified_depth":"0.8888405845567334"},{"sample_id":"20-2FE3Y_S218_L006","proportion_≥_specified_depth":"0.9930107347088921"},{"sample_id":"21-2FE3W_S219_L006","proportion_≥_specified_depth":"0.9887636691970705"},{"sample_id":"22-2FFY9_S220_L006","proportion_≥_specified_depth":"0.6436477945356653"},{"sample_id":"23-2FG3T_S221_L006","proportion_≥_specified_depth":"0.9945156004414273"},{"sample_id":"24-NTC-inac-31462_S222_L006","proportion_≥_specified_depth":"0.0"},{"sample_id":"25-2F8WU_S223_L006","proportion_≥_specified_depth":"0.9897669130187606"},{"sample_id":"26-2F90K_S224_L006","proportion_≥_specified_depth":"0.9952513125773333"},{"sample_id":"27-2F8KO_S225_L006","proportion_≥_specified_depth":"0.993144500551784"},{"sample_id":"28-2FC7B_S226_L006","proportion_≥_specified_depth":"0.9952847540380564"},{"sample_id":"29-2FT92_S227_L006","proportion_≥_specified_depth":"0.9874928936895964"},{"sample_id":"30-2FTER_S228_L006","proportion_≥_specified_depth":"0.9952847540380564"},{"sample_id":"31-2FN19_S229_L006","proportion_≥_specified_depth":"0.9949503394308263"},{"sample_id":"32-2J393_S230_L006","proportion_≥_specified_depth":"0.991706517740695"},{"sample_id":"33-2J2SX_S231_L006","proportion_≥_specified_depth":"0.992509112798047"},{"sample_id":"34-2J390_S232_L006","proportion_≥_specified_depth":"0.9948500150486573"},{"sample_id":"35-2J2SW_S233_L006","proportion_≥_specified_depth":"0.9946159248235963"},{"sample_id":"36-2J39J_S234_L006","proportion_≥_specified_depth":"0.99220813965154"},{"sample_id":"37-2J3AH_S235_L006","proportion_≥_specified_depth":"0.9901682105474368"},{"sample_id":"38-2J39F_S236_L006","proportion_≥_specified_depth":"0.992308464033709"},{"sample_id":"39-2J379_S237_L006","proportion_≥_specified_depth":"0.9932113834732301"},{"sample_id":"40-2J39P_S238_L006","proportion_≥_specified_depth":"0.9946828077450423"},{"sample_id":"41-2J39S_S239_L006","proportion_≥_specified_depth":"0.9943483931378123"},{"sample_id":"42-2J37N_S240_L006","proportion_≥_specified_depth":"0.9910042470655118"},{"sample_id":"43-2J3AY_S241_L006","proportion_≥_specified_depth":"0.9946493662843193"},{"sample_id":"44-2J39Z_S242_L006","proportion_≥_specified_depth":"0.9945824833628732"},{"sample_id":"45-2J3EF_S243_L006","proportion_≥_specified_depth":"0.9897000300973147"},{"sample_id":"46-2J3LK_S244_L006","proportion_≥_specified_depth":"0.9946828077450423"},{"sample_id":"47-2J3KW_S245_L006","proportion_≥_specified_depth":"0.9947496906664883"},{"sample_id":"48-NTC-isol-31462_S246_L006","proportion_≥_specified_depth":"0.0"},{"sample_id":"49-2J3GH_S247_L006","proportion_≥_specified_depth":"0.9947496906664883"},{"sample_id":"50-2J3P6_S248_L006","proportion_≥_specified_depth":"0.992341905494432"},{"sample_id":"51-2J3T5_S249_L006","proportion_≥_specified_depth":"0.9947162492057653"},{"sample_id":"52-2J4CZ_S250_L006","proportion_≥_specified_depth":"0.9823094672775307"},{"sample_id":"53-2J4C2_S251_L006","proportion_≥_specified_depth":"0.9948834565093804"},{"sample_id":"54-2J4A2_S252_L006","proportion_≥_specified_depth":"0.9941811858341972"},{"sample_id":"55-2J4BQ_S253_L006","proportion_≥_specified_depth":"0.9945824833628732"},{"sample_id":"56-2J4I2_S254_L006","proportion_≥_specified_depth":"0.9945824833628732"},{"sample_id":"57-2J4JQ_S255_L006","proportion_≥_specified_depth":"0.9947162492057653"},{"sample_id":"58-2J3ZS_S256_L006","proportion_≥_specified_depth":"0.9906363909975587"},{"sample_id":"59-2J416_S257_L006","proportion_≥_specified_depth":"0.9911380129084039"},{"sample_id":"60-2J3YG_S258_L006","proportion_≥_specified_depth":"0.9928769688660001"},{"sample_id":"61-2J4IL_S259_L006","proportion_≥_specified_depth":"0.9904023007724977"},{"sample_id":"62-2J4HP_S260_L006","proportion_≥_specified_depth":"0.9945824833628732"},{"sample_id":"63-2J4FA_S261_L006","proportion_≥_specified_depth":"0.9947496906664883"},{"sample_id":"64-2J4GU_S262_L006","proportion_≥_specified_depth":"0.9943818345985352"},{"sample_id":"65-2J3VB_S263_L006","proportion_≥_specified_depth":"0.9947496906664883"},{"sample_id":"66-2J4B4_S264_L006","proportion_≥_specified_depth":"0.992408788415878"},{"sample_id":"67-2J3TQ_S265_L006","proportion_≥_specified_depth":"0.9946828077450423"},{"sample_id":"68-2J46P_S266_L006","proportion_≥_specified_depth":"0.9945156004414273"},{"sample_id":"69-2J473_S267_L006","proportion_≥_specified_depth":"0.991706517740695"},{"sample_id":"70-2J478_S268_L006","proportion_≥_specified_depth":"0.9941811858341972"},{"sample_id":"71-2J48H_S269_L006","proportion_≥_specified_depth":"0.992241581112263"},{"sample_id":"72-RTPCR-NTC-31462_S270_L006","proportion_≥_specified_depth":"0.0"},{"sample_id":"73-2J4HI_S271_L006","proportion_≥_specified_depth":"0.9947162492057653"},{"sample_id":"74-2J48Y_S272_L006","proportion_≥_specified_depth":"0.9928769688660001"},{"sample_id":"75-2J4I7_S273_L006","proportion_≥_specified_depth":"0.9948165735879343"},{"sample_id":"76-2J4LX_S274_L006","proportion_≥_specified_depth":"0.9947162492057653"},{"sample_id":"77-2J4LF_S275_L006","proportion_≥_specified_depth":"0.9888305521185166"},{"sample_id":"78-2J4KI_S276_L006","proportion_≥_specified_depth":"0.9928769688660001"},{"sample_id":"79-2J4OZ_S277_L006","proportion_≥_specified_depth":"0.9946828077450423"},{"sample_id":"80-2J449_S278_L006","proportion_≥_specified_depth":"0.992308464033709"},{"sample_id":"81-2J4FB_S279_L006","proportion_≥_specified_depth":"0.993044176169615"},{"sample_id":"82-2J4G9_S280_L006","proportion_≥_specified_depth":"0.992308464033709"},{"sample_id":"83-2J46Q_S281_L006","proportion_≥_specified_depth":"0.9911380129084039"},{"sample_id":"84-2J4GM_S282_L006","proportion_≥_specified_depth":"0.9944821589807042"},{"sample_id":"85-2J4F1_S283_L006","proportion_≥_specified_depth":"0.9869912717787513"},{"sample_id":"86-2J53A_S284_L006","proportion_≥_specified_depth":"0.9884626960505635"},{"sample_id":"87-2J4ZT_S285_L006","proportion_≥_specified_depth":"0.9901347690867137"},{"sample_id":"88-2J4BT_S286_L006","proportion_≥_specified_depth":"0.9945824833628732"},{"sample_id":"89-2J594_S287_L006","proportion_≥_specified_depth":"0.9946493662843193"},{"sample_id":"90-2J53H_S288_L006","proportion_≥_specified_depth":"0.9630806273618031"},{"sample_id":"91-2J4F7_S289_L006","proportion_≥_specified_depth":"0.005885697087248771"},{"sample_id":"92-2J5KL_S290_L006","proportion_≥_specified_depth":"0.9946828077450423"},{"sample_id":"93-2J5EQ_S291_L006","proportion_≥_specified_depth":"0.9946828077450423"},{"sample_id":"94-2J5EF_S292_L006","proportion_≥_specified_depth":"0.9946828077450423"},{"sample_id":"95-2J7GQ_S293_L006","proportion_≥_specified_depth":"0.9947162492057653"}];
+
+          const chart = Plot.plot({
+            marginLeft: 200,
+            x: {axis: "top", percent: true},
+            y: {label: "Sample ID"},
+            marks: [
+              Plot.barX(coverageData, {
+                x: "proportion_≥_specified_depth",
+                y: "sample_id",
+                fill: d => {
+                    const value = d["proportion_≥_specified_depth"];
+                    if (value > 0.9) return "green";
+                    if (value < 0.9) return "red";
+                    return "red";
+                },
+                sort: {y: "-x"}
+              }),
+              Plot.text(coverageData, {
+                x: "proportion_≥_specified_depth",
+                y: "sample_id",
+                text: d => format(".1%")(d["proportion_≥_specified_depth"]),
+                textAnchor: "start",
+                dx: 3,
+                filter: d => d["proportion_≥_specified_depth"] <= 0.07,
+                fill: "currentColor"
+              }),
+              Plot.text(coverageData, {
+                x: "proportion_≥_specified_depth",
+                y: "sample_id",
+                text: d => format(".1%")(d["proportion_≥_specified_depth"]),
+                textAnchor: "end",
+                dx: -3,
+                filter: d => d["proportion_≥_specified_depth"] > 0.07,
+                fill: "white"
+              }),
+              Plot.ruleX([0])
+            ]
+          });
+          document.getElementById("chart").appendChild(chart);
+        </script>
+      </body>
+    </html>

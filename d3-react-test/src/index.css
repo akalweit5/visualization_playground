@@ -1,0 +1,33 @@
+body {
+  background-image: url("https://htmlcolorcodes.com/assets/images/colors/tan-color-solid-background-1920x1080.png");
+  background-size: cover;
+background-repeat: no-repeat;
+background-attachment: fixed;
+background-position: center;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+#description{
+  text-align: center;
+  font-size: large;
+  font-family: fantasy;
+}
+
+#chartTitle{
+  text-align: center;
+  font-family: cursive;
+}
+
+#chart{
+  text-align: center;
+}

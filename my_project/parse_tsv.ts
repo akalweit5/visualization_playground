@@ -36,9 +36,3 @@ export class Converter {
     return JSON.parse(jsonStr) as any[];
   }
 }
-
-const converter = new Converter();
-
-const jsonData = await converter.textToJson("/Volumes/T7/31462/30606-auto-cell-type.rmd.tsv");  // change to your file path
-
-console.log(jsonData);
